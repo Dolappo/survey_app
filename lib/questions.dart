@@ -1,15 +1,19 @@
 class Question {
-  String? questionText;
-  String? optionA;
-  String? optionB;
-  String? optionC;
-  String? optionD;
+  String questionText;
+  List<String> options;
 
-  Question(
-    this.questionText,
-    this.optionA,
-    this.optionB,
-    this.optionC,
-    this.optionD,
-  );
+  Question({
+    required this.questionText,
+    required this.options,
+  });
+}
+
+
+class Options{
+  String optionA;
+  String optionB;
+  String optionC;
+  String optionD;
+
+  Options({required this.optionA, required this.optionB, required this.optionC, required this.optionD});
 }

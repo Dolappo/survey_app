@@ -30,9 +30,9 @@ class _MyAppState extends State<MyApp> {
         '/welcome': (context) {
           return const Welcome();
         },
-        '/questions': (context) {
-          return const DisplayQuestions();
-        },
+        // '/questions': (context) {
+        //   return const DisplayQuestions();
+        // },
       },
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_challenge/display_questions_screen.dart';
 import 'package:survey_challenge/text_styles.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -55,7 +56,7 @@ class _WelcomeState extends State<Welcome> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/questions');
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> QuestionsScreen()));
                     },
                     child: const Text(
                       'Yes',

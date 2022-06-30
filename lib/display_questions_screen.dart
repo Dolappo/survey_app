@@ -1,154 +1,98 @@
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:survey_challenge/questions_bank.dart';
-import 'package:survey_challenge/prepare_survey_screen.dart';
+import 'package:survey_challenge/model.dart';
 
-class DisplayQuestions extends StatelessWidget {
-  const DisplayQuestions({Key? key}) : super(key: key);
+class QuestionWidget extends StatefulWidget {
+  final int index;
+  const QuestionWidget({required this.index, Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: ShowQuestions(),
-          ),
-        ),
-      ),
-    );
-  }
+  State<QuestionWidget> createState() => _QuestionWidgetState();
 }
 
-class ShowQuestions extends StatefulWidget {
-  const ShowQuestions({Key? key}) : super(key: key);
-
-  @override
-  State<ShowQuestions> createState() => _ShowQuestionsState();
-}
-
-class _ShowQuestionsState extends State<ShowQuestions> {
-  InformationQuestion surveyQuestions = InformationQuestion();
-  void readyScreen() {
-    setState(() {
-      if (surveyQuestions.isFinished() == true) {
-        Alert(
-          context: context,
-          type: AlertType.success,
-          title: "Thank You!",
-          desc:
-              "Your information is safe with us. Kindly proceed to the survey questions!",
-          buttons: [
-            DialogButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: ((context) => const Ready()),
-                ),
-              ),
-              width: 120,
-              child: const Text(
-                "CONTINUE",
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-            )
-          ],
-        ).show();
-      }
-      surveyQuestions.nextQuestion();
-    });
-  }
-
+class _QuestionWidgetState extends State<QuestionWidget> {
+  AppController app = AppController();
   @override
   Widget build(BuildContext context) {
+    AppController app = AppController();
+    String groupValue = app.questions[widget.index].options[0];
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          margin: const EdgeInsets.all(10.0),
-          child: const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Text(
-              'User\'s Information Page',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0),
-          child: Text(
-            surveyQuestions.getQuestionText()!,
-            style: const TextStyle(
-              fontSize: 15.0,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 5,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Center(
-              child: Text(
-                surveyQuestions.getOptionA()!,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 50.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.red),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      surveyQuestions.backQuestion();
-                    });
-                  },
-                  child: const Text(
-                    'Back',
-                    style:
-                        TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 100.0,
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.green),
-                  ),
-                  onPressed: () {
-                    readyScreen();
-                  },
-                  child: const Text(
-                    'Next',
-                    style:
-                        TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        Text(app.questions[widget.index].questionText),
+        OptionsTile(
+            index: widget.index,
+            groupValue: groupValue,
+          onChanged: (value){
+              setState((){
+                groupValue = value!;
+              });
+          },
+        )
       ],
     );
   }
 }
+
+class OptionsTile extends StatefulWidget {
+  final int index;
+  final String groupValue;
+  final void Function(String?)? onChanged;
+  const OptionsTile({required this.groupValue, required this.onChanged,required this.index, Key? key}) : super(key: key);
+
+  @override
+  State<OptionsTile> createState() => _OptionsTileState();
+}
+
+class _OptionsTileState extends State<OptionsTile> {
+  @override
+  Widget build(BuildContext context) {
+    AppController app = AppController();
+    bool isSelected = false;
+    return Column(
+        children: List.generate(app.questions[widget.index].options.length, (index) {
+      String? groupValue = app.questions[widget.index].options[1];
+      return RadioListTile(
+        value: app.questions[widget.index].options[index],
+        groupValue: widget.groupValue,
+        onChanged: widget.onChanged,
+        title: Text(app.questions[widget.index].options[index]),
+      );
+    }));
+  }
+}
+
+class QuestionsScreen extends StatefulWidget {
+  const QuestionsScreen({Key? key}) : super(key: key);
+  @override
+  State<QuestionsScreen> createState() => _QuestionsScreenState();
+}
+class _QuestionsScreenState extends State<QuestionsScreen> {
+  int currentPage = 0;
+  void nextQuestion(int index) {
+    currentPage = index;
+  }
+  AppController app = AppController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Questions'),
+        ),
+        body: SafeArea(
+            child: Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                    children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.6,
+                    child: PageView(
+                      scrollDirection: Axis.vertical,
+                      onPageChanged: (i)=> nextQuestion(i),
+                      children: List.generate(
+                          4, (index) => QuestionWidget(index: index)),
+                    ),
+                  ),
+                ]))));
+  }
+}
+
