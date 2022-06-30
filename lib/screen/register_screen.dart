@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:survey_challenge/constants.dart';
-import 'package:survey_challenge/text_styles.dart';
+import 'package:survey_challenge/utils/constants.dart';
+
+import '../utils/text_styles.dart';
 
 class Register extends StatelessWidget {
   const Register({Key? key}) : super(key: key);

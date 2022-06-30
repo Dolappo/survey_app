@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:survey_challenge/display_questions_screen.dart';
-import 'package:survey_challenge/text_styles.dart';
+import 'package:survey_challenge/screen/display_questions_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:survey_challenge/utils/text_styles.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);

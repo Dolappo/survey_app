@@ -1,8 +1,49 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_challenge/questions.dart';
+import 'models/question_model.dart';
 
-class AppController{
+class AppController extends ChangeNotifier{
+  AppController(){
+    setGroupValue();
+  }
+
+  List<String> answers = [];
+
+int pageIndex = 0;
+
+void nextPage(){
+  if(pageIndex != _questionsKeeper.length-1){
+    pageIndex++;
+    notifyListeners();
+  }
+  else{
+    pageIndex = 0;
+    notifyListeners();
+  }
+}
+void previousPage(){
+  if(pageIndex!=0){
+    pageIndex--;
+    notifyListeners();
+  }
+}
+
+
+late String _groupValue;
+
+void setGroupValue(){
+  _groupValue = _questionsKeeper[pageIndex].options[1];
+  notifyListeners();
+}
+
+
+ void updateOption(String? value, index){
+  _groupValue = value!;
+  answers.add(value);
+  notifyListeners();
+ }
+
+ String get groupValue => _groupValue;
+
   final List<Question> _questionsKeeper = [
   Question(
   questionText: "Employment Status of respondent:",
