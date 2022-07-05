@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:survey_challenge/screen/display_questions_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:survey_challenge/utils/text_styles.dart';
+
+import 'category_screen.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -56,7 +57,7 @@ class _WelcomeState extends State<Welcome> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> QuestionsScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const CatScreen()));
                     },
                     child: const Text(
                       'Yes',

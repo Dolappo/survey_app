@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_challenge/utils/constants.dart';
-
 import '../utils/text_styles.dart';
 
 class Register extends StatelessWidget {

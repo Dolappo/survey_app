@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:survey_challenge/app_controller.dart';
 import 'package:survey_challenge/widgets/question_widget.dart';
+
+import 'category_screen.dart';
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({Key? key}) : super(key: key);
+  final Cats type;
+  const QuestionsScreen({required this.type, Key? key}) : super(key: key);
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
 }
 class _QuestionsScreenState extends State<QuestionsScreen> {
-  AppController app = AppController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Questions'),
+          title:  Text('Questions ${widget.type}'),
         ),
         body: Consumer<AppController>(
           builder: (context, model, _) {
@@ -28,7 +30,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                         child: PageView(
                           physics: const NeverScrollableScrollPhysics(),
                           children: List.generate(
-                              4, (index) => const QuestionWidget()),
+                              model.checkTypeLength(widget.type), (index) => QuestionWidget(type: widget.type,)),
                         ),
                       ),
                           Padding(
@@ -43,7 +45,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                                 ),
                                 MaterialButton(
                                   color: Colors.blue,
-                                  onPressed: ()=> model.nextPage(),
+                                  onPressed: ()=> model.nextPage(widget.type),
                                   child: const Text('Next'),
                                 ),
                               ],
