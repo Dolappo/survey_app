@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:survey_challenge/register_screen.dart';
-import 'package:survey_challenge/text_styles.dart';
+import 'package:survey_challenge/screen/register_screen.dart';
+
+import '../utils/text_styles.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
