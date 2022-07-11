@@ -27,34 +27,19 @@ class CatScreen extends StatelessWidget {
                             model.isBusy = true;
                             if (index == 0) {
                               model.setType(Cats.love);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const QuestionsScreen()));
                             } else if (index == 1) {
                               model.setType(Cats.health);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const QuestionsScreen()));
                             } else if (index == 2) {
                               model.setType(Cats.education);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const QuestionsScreen()));
                             } else {
                               model.setType(Cats.politics);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const QuestionsScreen()));
                             }
                             model.isBusy = false;
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const QuestionsScreen()));
                           },
                           color: Colors.blue,
                           child: model.isBusy
