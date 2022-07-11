@@ -6,12 +6,14 @@ class AppController extends ChangeNotifier{
 
  bool isBusy = false;
 
+ late Cats _type;
+
   List<String> answers = [];
 
 int pageIndex = 0;
 
-void nextPage(Cats type){
-  if(pageIndex != checkTypeLength(type)-1){
+void nextPage(){
+  if(pageIndex != checkTypeLength()-1){
     pageIndex++;
     notifyListeners();
   }
@@ -27,33 +29,40 @@ void previousPage(){
   }
 }
 
-List<String> checkGroupValue(Cats type){
-  if(type == Cats.politics){
-    return politicsGroupValues;
-  }
-  else if(type == Cats.love){
-    return loveGroupValues;
-  }
-  else if(type == Cats.education){
-    return educationGroupValues;
-  }
-  else{
-    return healthGroupValues;
-  }
+void setType(Cats selectedType){
+  _type = selectedType;
+  notifyListeners();
 }
 
-List<String> healthGroupValues = ['', '', '', '',];
-List<String> politicsGroupValues = ['', '', '', '',];
-List<String> loveGroupValues = ['', '', '', '',];
-List<String> educationGroupValues = ['', '', '', '',];
+Cats get type => _type;
+//
+// List<String> checkGroupValue(Cats type){
+//   if(type == Cats.politics){
+//     return politicsGroupValues;
+//   }
+//   else if(type == Cats.love){
+//     return loveGroupValues;
+//   }
+//   else if(type == Cats.education){
+//     return educationGroupValues;
+//   }
+//   else{
+//     return healthGroupValues;
+//   }
+// }
+
+// List<String> healthGroupValues = ['', '', '', '',];
+// List<String> politicsGroupValues = ['', '', '', '',];
+// List<String> loveGroupValues = ['', '', '', '',];
+// List<String> educationGroupValues = ['', '', '', '',];
 
  void updateOption(String? value, int index, Cats type){
-  checkGroupValue(type)[index] = value!;
+  checkType().answer = value!;
   answers.add(value);
   notifyListeners();
  }
 
-  int checkTypeLength(Cats type){
+  int checkTypeLength(){
     if(type==Cats.health){
       return healthQuestion.length;
     }
@@ -68,7 +77,7 @@ List<String> educationGroupValues = ['', '', '', '',];
     }
   }
 
- Question checkType(Cats type){
+ Question checkType(){
    if(type==Cats.health){
      return healthQuestion[pageIndex];
    }

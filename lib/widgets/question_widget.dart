@@ -5,8 +5,8 @@ import 'package:survey_challenge/utils/text_styles.dart';
 import '../app_controller.dart';
 import 'options_tile.dart';
 class QuestionWidget extends StatefulWidget {
-  final Cats type;
-  const QuestionWidget({required this.type,Key? key}) : super(key: key);
+  final bool isAnswer;
+  const QuestionWidget({this.isAnswer = false,Key? key}) : super(key: key);
   @override
   State<QuestionWidget> createState() => _QuestionWidgetState();
 }
@@ -28,12 +28,23 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Text(
-                          model.checkType(widget.type).questionText,
+                          model.checkType().questionText,
                           style: titleStyle.copyWith(fontSize: 20, color: Colors.white),),
                       ),
                     ),
                   ),
-                   OptionsTile(type: widget.type),
+                   if(!widget.isAnswer)
+                   OptionsTile(type: model.type),
+                  if(widget.isAnswer)
+                    Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(right: 8.0),
+                          child: Text('Answer: '),
+                        ),
+                        Text(model.checkType().answer??'No answer selected')
+                      ],
+                    )
                 ]),
           );
         }
