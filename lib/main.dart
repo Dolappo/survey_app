@@ -4,7 +4,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:survey_challenge/screen/display_questions_screen.dart';
 import 'package:survey_challenge/app_controller.dart';
 import 'package:survey_challenge/screen/splash_screen.dart';
-import 'package:survey_challenge/screen/register_screen.dart';
+import 'package:survey_challenge/screen/welcome/persona_welcome_screen.dart';
 import 'package:survey_challenge/screen/welcome.dart';
 import 'package:survey_challenge/setups/setup_bottom_sheet_ui.dart';
 import 'package:survey_challenge/setups/setup_dialog_ui.dart';
@@ -32,6 +32,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.teal,
+        accentColor: Colors.tealAccent,
+        backgroundColor: Colors.teal,
+        buttonColor: Colors.teal
+      ),
+      debugShowCheckedModeBanner: false,
         navigatorKey: StackedService.navigatorKey,
         initialRoute: Routes.splashScreen,
         onGenerateRoute: StackedRouter().onGenerateRoute,

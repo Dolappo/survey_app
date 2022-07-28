@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:survey_challenge/screen/category_screen.dart';
+import 'package:survey_challenge/screen/category/category_screen.dart';
 import 'package:survey_challenge/utils/text_styles.dart';
 import '../app_controller.dart';
 import 'options_tile.dart';
@@ -26,7 +26,7 @@ class QuestionWidget extends ViewModelWidget<AppController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Card(
-              color: Colors.blue,
+              color: Theme.of(context).primaryColor,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(

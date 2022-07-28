@@ -1,16 +1,16 @@
 
-import '../../screen/category_screen.dart';
+import '../../screen/category/category_screen.dart';
 
 class Question {
-  String questionText;
+  String? questionText;
   List<String>? options;
   String? answer;
-  Cats type;
+  Cats? type;
 
   Question({
-    required this.questionText,
+     this.questionText,
     this.answer = '',
     this.options,
-    required this.type,
+     this.type,
   });
 }

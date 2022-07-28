@@ -5,7 +5,7 @@ import 'package:survey_challenge/app/app_setup.router.dart';
 import 'package:survey_challenge/app_controller.dart';
 import 'package:survey_challenge/utils/text_styles.dart';
 
-import 'category_screen.dart';
+import 'category/category_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

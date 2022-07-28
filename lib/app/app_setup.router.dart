@@ -11,29 +11,33 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
 import '../app_controller.dart';
-import '../screen/category_screen.dart';
+import '../screen/category/category_screen.dart';
+import '../screen/create_account/create_account_screen.dart';
 import '../screen/display_questions_screen.dart';
+import '../screen/login/login_screen.dart';
 import '../screen/prepare_survey_screen.dart';
 import '../screen/preview_answer_screen.dart';
-import '../screen/register_screen.dart';
 import '../screen/splash_screen.dart';
-import '../screen/welcome.dart';
+import '../screen/welcome/persona_welcome_screen.dart';
 
 class Routes {
   static const String splashScreen = '/';
-  static const String registerScreen = '/register-screen';
+  static const String personaWelcomeScreen = '/persona-welcome-screen';
   static const String catScreen = '/cat-screen';
   static const String questionsScreen = '/questions-screen';
   static const String previewAnswerScreen = '/preview-answer-screen';
-  static const String welcomeScreen = '/welcome-screen';
+  // static const String personaWelcomeScreen = '/persona-welcome-screen';
+  static const String createAccScreen = '/create-acc-screen';
+  static const String loginScreen = '/login-screen';
   static const String readyScreen = '/ready-screen';
   static const all = <String>{
     splashScreen,
-    registerScreen,
+    personaWelcomeScreen,
     catScreen,
     questionsScreen,
     previewAnswerScreen,
-    welcomeScreen,
+    createAccScreen,
+    loginScreen,
     readyScreen,
   };
 }
@@ -43,11 +47,13 @@ class StackedRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.splashScreen, page: SplashScreen),
-    RouteDef(Routes.registerScreen, page: RegisterScreen),
+    RouteDef(Routes.personaWelcomeScreen, page: PersonaWelcomeScreen),
     RouteDef(Routes.catScreen, page: CatScreen),
     RouteDef(Routes.questionsScreen, page: QuestionsScreen),
     RouteDef(Routes.previewAnswerScreen, page: PreviewAnswerScreen),
-    RouteDef(Routes.welcomeScreen, page: WelcomeScreen),
+    RouteDef(Routes.personaWelcomeScreen, page: PersonaWelcomeScreen),
+    RouteDef(Routes.createAccScreen, page: CreateAccScreen),
+    RouteDef(Routes.loginScreen, page: LoginScreen),
     RouteDef(Routes.readyScreen, page: ReadyScreen),
   ];
   @override
@@ -59,9 +65,9 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    RegisterScreen: (data) {
+    PersonaWelcomeScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const RegisterScreen(),
+        builder: (context) => const PersonaWelcomeScreen(),
         settings: data,
       );
     },
@@ -92,9 +98,15 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    WelcomeScreen: (data) {
+    CreateAccScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const WelcomeScreen(),
+        builder: (context) => const CreateAccScreen(),
+        settings: data,
+      );
+    },
+    LoginScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const LoginScreen(),
         settings: data,
       );
     },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:survey_challenge/screen/register_screen.dart';
+import 'package:survey_challenge/screen/welcome/persona_welcome_screen.dart';
 
 import '../utils/text_styles.dart';
 
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
       (value) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const RegisterScreen(),
+          builder: (context) => const PersonaWelcomeScreen(),
         ),
       ),
     );
@@ -28,46 +28,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            child: const Padding(
-              padding: EdgeInsets.all(10),
-            ),
-          ),
-          Row(
-            children: [
-              const Image(
-                height: 120,
-                width: 120,
-                image: AssetImage(
-                  'images/ribbonimage.png',
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Survey',
-                    style: titleStyle.copyWith(fontSize: 42),
-                  ),
-                  Text(
-                    'Help you manage your health',
-                    style: titleStyle,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 30),
-            child: SpinKitFadingCircle(
-              color: Colors.pinkAccent,
-              size: 30.0,
-            ),
-          ),
-        ],
+      backgroundColor: Colors.teal,
+      body: Center(
+      child:
+          Text('Personavey', style: titleStyle.copyWith(fontSize: 32, fontWeight: FontWeight.w700, color: Colors.white)),
       ),
     );
   }
