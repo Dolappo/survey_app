@@ -1,62 +1,74 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
 import 'package:survey_challenge/app_controller.dart';
+import 'package:survey_challenge/utils/text_styles.dart';
 import 'package:survey_challenge/widgets/question_widget.dart';
-
 import 'category_screen.dart';
-class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({ Key? key}) : super(key: key);
-  @override
-  State<QuestionsScreen> createState() => _QuestionsScreenState();
-}
-class _QuestionsScreenState extends State<QuestionsScreen> {
+
+class QuestionsScreen extends StatelessWidget {
+  final Cats type;
+  const QuestionsScreen({required this.type, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppController>(
-      builder: (context, model, _) {
-        return Scaffold(
-            appBar: AppBar(
-              title:  Text('Questions ${model.type}'),
-            ),
-            body: Consumer<AppController>(
-              builder: (context, model, _) {
-                return SafeArea(
-                    child: Container(
-                        color: Colors.white,
-                        height: MediaQuery.of(context).size.height,
-                        child: Column(
-                            children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.6,
-                            child: PageView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              children: List.generate(
-                                  model.checkTypeLength(), (index) => const QuestionWidget()),
-                            ),
-                          ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    MaterialButton(
-                                      color: Colors.blue,
-                                      onPressed: ()=> model.previousPage(),
-                                      child: const Text('Previous'),
-                                    ),
-                                    MaterialButton(
-                                      color: Colors.blue,
-                                      onPressed: ()=> model.nextPage(),
-                                      child: const Text('Next'),
-                                    ),
-                                  ],
+    return ViewModelBuilder<AppController>.reactive(
+        viewModelBuilder: () => AppController(),
+        builder: (context, viewModel, _) {
+          return Scaffold(
+              appBar: AppBar(
+                title: Text('Questions $type'),
+              ),
+              body: SafeArea(
+                  child: Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height,
+                child: Column(children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.6,
+                    child: PageView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: List.generate(
+                          viewModel.checkTypeLength(type),
+                          (index) => QuestionWidget(
+                                type: type,
+                                question:
+                                    viewModel.checkType(type).questionText,
+                              )),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        (viewModel.pageIndex != 0)
+                            ? MaterialButton(
+                                color: Colors.blue,
+                                onPressed: () => viewModel.previousPage(),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text('Previous',
+                                      style: titleStyle.copyWith(
+                                          color: Colors.white, fontSize: 20)),
                                 ),
                               )
-                        ])));
-              }
-            ));
-      }
-    );
+                            : const SizedBox(),
+                        MaterialButton(
+                          color: Colors.blue,
+                          onPressed: () => viewModel.nextPage(type, viewModel),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              viewModel.nextButton(type),
+                              style: titleStyle.copyWith(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ]),
+              )));
+        });
   }
 }
-

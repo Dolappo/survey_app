@@ -1,29 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
 import '../app_controller.dart';
 import '../screen/category_screen.dart';
 
-class OptionsTile extends StatefulWidget {
+class OptionsTile extends ViewModelWidget<AppController> {
   final Cats type;
   const OptionsTile({ Key? key, required this.type}) : super(key: key);
   @override
-  State<OptionsTile> createState() => _OptionsTileState();
-}
-class _OptionsTileState extends State<OptionsTile> {
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<AppController>(
-        builder: (context, model, _){
+  Widget build(BuildContext context, viewModel) {
           return Column(
-              children: List.generate(model.checkType().options.length, (index) {
+              children: List.generate(viewModel.checkType(type).options!.length, (index) {
                 return RadioListTile(
-                  value: model.checkType().options[index],
-                  groupValue: model.checkType().answer,
-                  onChanged: (String? value)=> model.updateOption(value, index, widget.type),
-                  title: Text(model.checkType().options[index]),
+                  value: viewModel.checkType(type).options![index],
+                  groupValue: viewModel.checkType(type).answer,
+                  onChanged: (String? value)=> viewModel.updateOption(value, index, type),
+                  title: Text(viewModel.checkType(type).options![index]),
                 );
               }));
-        }
-    );
   }
 }

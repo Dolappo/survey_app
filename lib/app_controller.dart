@@ -1,100 +1,100 @@
-import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:survey_challenge/app/app_setup.router.dart';
 import 'package:survey_challenge/screen/category_screen.dart';
-import 'models/question_model.dart';
+import 'app/app_setup.locator.dart';
+import 'core/models/question_model.dart';
 
-class AppController extends ChangeNotifier{
+class AppController extends BaseViewModel {
+  final _navigate = locator<NavigationService>();
 
- bool isBusy = false;
+  List<Question> answer = [];
 
- late Cats _type;
+  int pageIndex = 0;
 
-  List<String> answers = [];
+  String nextButton(Cats type) {
+    if (pageIndex != checkTypeLength(type) - 1) {
+      return 'Next';
+    } else {
+      return 'Submit';
+    }
+  }
 
-int pageIndex = 0;
+  void nextPage(Cats type, viewModel) {
+    if (pageIndex != checkTypeLength(type) - 1) {
+      // print(checkType(type).answer);
+      // answer.add(checkType(type));
+      pageIndex++;
 
-void nextPage(){
-  if(pageIndex != checkTypeLength()-1){
-    pageIndex++;
+      notifyListeners();
+    } else {
+      // answer.add(checkType(type));
+      // print(answer);
+      navigate(Routes.previewAnswerScreen,
+          arguments: PreviewAnswerScreenArguments(type: type, viewModel:viewModel ));
+    }
+  }
+
+  void navigate(String route, {dynamic arguments}) {
+    _navigate.navigateTo(route, arguments: arguments);
+  }
+
+  void previousPage() {
+    if (pageIndex != 0) {
+      pageIndex--;
+      notifyListeners();
+    }
+  }
+
+  void navigateToType(int index) {
+    if (index == 0) {
+      _navigate.navigateTo(Routes.questionsScreen,
+          arguments: QuestionsScreenArguments(type: Cats.love));
+    } else if (index == 1) {
+      _navigate.navigateTo(Routes.questionsScreen,
+          arguments: QuestionsScreenArguments(type: Cats.health));
+    } else if (index == 2) {
+      _navigate.navigateTo(Routes.questionsScreen,
+          arguments: QuestionsScreenArguments(type: Cats.education));
+    } else {
+      _navigate.navigateTo(Routes.questionsScreen,
+          arguments: QuestionsScreenArguments(type: Cats.politics));
+    }
+  }
+
+  void updateOption(String? value, int index, Cats type) {
+    checkType(type).answer = value!;
+    answer.add(Question(questionText: checkType(type).questionText, answer: value, type: type));
     notifyListeners();
   }
-  else{
-    pageIndex = 0;
-    notifyListeners();
-  }
-}
-void previousPage(){
-  if(pageIndex!=0){
-    pageIndex--;
-    notifyListeners();
-  }
-}
 
-void setType(Cats selectedType){
-  _type = selectedType;
-  notifyListeners();
-}
-
-Cats get type => _type;
-//
-// List<String> checkGroupValue(Cats type){
-//   if(type == Cats.politics){
-//     return politicsGroupValues;
-//   }
-//   else if(type == Cats.love){
-//     return loveGroupValues;
-//   }
-//   else if(type == Cats.education){
-//     return educationGroupValues;
-//   }
-//   else{
-//     return healthGroupValues;
-//   }
-// }
-
-// List<String> healthGroupValues = ['', '', '', '',];
-// List<String> politicsGroupValues = ['', '', '', '',];
-// List<String> loveGroupValues = ['', '', '', '',];
-// List<String> educationGroupValues = ['', '', '', '',];
-
- void updateOption(String? value, int index, Cats type){
-  checkType().answer = value!;
-  answers.add(value);
-  notifyListeners();
- }
-
-  int checkTypeLength(){
-    if(type==Cats.health){
+  int checkTypeLength(Cats type) {
+    if (type == Cats.health) {
       return healthQuestion.length;
-    }
-    else if(type==Cats.politics){
+    } else if (type == Cats.politics) {
       return politicsQuestion.length;
-    }
-    else if(type==Cats.love){
+    } else if (type == Cats.love) {
       return loveQuestion.length;
-    }
-    else{
+    } else {
       return eduQuestion.length;
     }
   }
 
- Question checkType(){
-   if(type==Cats.health){
-     return healthQuestion[pageIndex];
-   }
-   else if(type==Cats.education){
-     return eduQuestion[pageIndex];
-   }
-   else if(type == Cats.love){
-     return loveQuestion[pageIndex];
-   }
-   else {
-     return politicsQuestion[pageIndex];
-   }
- }
+  Question checkType(Cats type) {
+    if (type == Cats.health) {
+      return healthQuestion[pageIndex];
+    } else if (type == Cats.education) {
+      return eduQuestion[pageIndex];
+    } else if (type == Cats.love) {
+      return loveQuestion[pageIndex];
+    } else {
+      return politicsQuestion[pageIndex];
+    }
+  }
 
   final List<Question> _loveQuestion = [
     Question(
-      questionText: "What is your marital status?  love",
+      questionText: "What is your marital status? ",
       type: Cats.love,
       options: [
         "Single",
@@ -104,17 +104,16 @@ Cats get type => _type;
       ],
     ),
     Question(
-        questionText: "Employment Status of respondent: love" ,
+        questionText: "Employment Status of respondent",
         type: Cats.love,
         options: [
           "Self-employed",
           "Employed",
           "Unemployed",
           "Student",
-        ]
-    ),
+        ]),
     Question(
-      questionText:  "How old are you now? love ",
+      questionText: "How old are you now? ",
       type: Cats.love,
       options: [
         "0-20",
@@ -124,20 +123,19 @@ Cats get type => _type;
       ],
     ),
     Question(
-        questionText: "What is your current weight? love ",
+        questionText: "What is your current weight?",
         type: Cats.love,
-        options:[
+        options: [
           "50-70",
           "71-80",
           "80-90",
           "91 and above",
-        ]
-    ),
+        ]),
   ];
 
   final List<Question> _politicsQuestion = [
     Question(
-      questionText: "What is your marital status?  politics",
+      questionText: "What is your marital status?",
       type: Cats.politics,
       options: [
         "Single",
@@ -147,17 +145,16 @@ Cats get type => _type;
       ],
     ),
     Question(
-        questionText: "Employment Status of respondent: politics" ,
+        questionText: "Employment Status of respondent:",
         type: Cats.politics,
         options: [
           "Self-employed",
           "Employed",
           "Unemployed",
           "Student",
-        ]
-    ),
+        ]),
     Question(
-      questionText:  "How old are you now? politics ",
+      questionText: "How old are you now? ",
       type: Cats.politics,
       options: [
         "0-20",
@@ -167,20 +164,19 @@ Cats get type => _type;
       ],
     ),
     Question(
-        questionText: "What is your current weight? politics ",
+        questionText: "What is your current weight? ",
         type: Cats.politics,
-        options:[
+        options: [
           "50-70",
           "71-80",
           "80-90",
           "91 and above",
-        ]
-    ),
+        ]),
   ];
 
   final List<Question> _healthQuestion = [
     Question(
-      questionText: "What is your marital status?  health",
+      questionText: "What is your marital status? ",
       type: Cats.health,
       options: [
         "Single",
@@ -190,17 +186,16 @@ Cats get type => _type;
       ],
     ),
     Question(
-        questionText: "Employment Status of respondent: health" ,
+        questionText: "Employment Status of respondent:",
         type: Cats.health,
         options: [
           "Self-employed",
           "Employed",
           "Unemployed",
           "Student",
-        ]
-    ),
+        ]),
     Question(
-      questionText:  "How old are you now? health ",
+      questionText: "How old are you now? ",
       type: Cats.health,
       options: [
         "0-20",
@@ -210,20 +205,19 @@ Cats get type => _type;
       ],
     ),
     Question(
-        questionText: "What is your current weight? health ",
+        questionText: "What is your current weight? ",
         type: Cats.health,
-        options:[
+        options: [
           "50-70",
           "71-80",
           "80-90",
           "91 and above",
-        ]
-    ),
+        ]),
   ];
 
   final List<Question> _eduQuestion = [
     Question(
-      questionText: "What is your marital status?  education",
+      questionText: "What is your marital status? ",
       type: Cats.education,
       options: [
         "Single",
@@ -233,17 +227,16 @@ Cats get type => _type;
       ],
     ),
     Question(
-        questionText: "Employment Status of respondent: education" ,
+        questionText: "Employment Status of respondent:",
         type: Cats.education,
         options: [
           "Self-employed",
           "Employed",
           "Unemployed",
           "Student",
-        ]
-    ),
+        ]),
     Question(
-      questionText:  "How old are you now? education ",
+      questionText: "How old are you now? ",
       type: Cats.education,
       options: [
         "0-20",
@@ -253,25 +246,22 @@ Cats get type => _type;
       ],
     ),
     Question(
-        questionText: "What is your current weight? education ",
+        questionText: "What is your current weight? ",
         type: Cats.education,
-        options:[
+        options: [
           "50-70",
           "71-80",
           "80-90",
           "91 and above",
-        ]
-    ),
+        ]),
   ];
 
-   List<Question> get eduQuestion => _eduQuestion;
-   List<Question> get loveQuestion => _loveQuestion;
-   List<Question> get healthQuestion => _healthQuestion;
-   List<Question> get politicsQuestion => _politicsQuestion;
+  List<Question> get eduQuestion => _eduQuestion;
+  List<Question> get loveQuestion => _loveQuestion;
+  List<Question> get healthQuestion => _healthQuestion;
+  List<Question> get politicsQuestion => _politicsQuestion;
 
   final List<String> _cat = ['Love', 'Health', 'Education', 'Politics'];
 
   List<String> get cat => _cat;
-
-
 }

@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
       (value) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const Register(),
+          builder: (context) => const RegisterScreen(),
         ),
       ),
     );
