@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:survey_challenge/app_controller.dart';
+import 'package:survey_challenge/utils/text_styles.dart';
 import 'package:survey_challenge/widgets/question_widget.dart';
 
-import 'category_screen.dart';
+import 'category/category_screen.dart';
 
 class PreviewAnswerScreen extends StatelessWidget {
   final AppController viewModel;
@@ -20,17 +21,28 @@ class PreviewAnswerScreen extends StatelessWidget {
         builder: (context, model, _) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Preview Answer'),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                color: Theme.of(context).primaryColor,
+                onPressed: ()=> Navigator.pop(context),
+              ),
+              title:  Text('Preview Answer', style: titleStyle.copyWith(color: Theme.of(context).primaryColor),),
             ),
-            body: Column(
-              children: List.generate(
-                  viewModel.answer.length,
-                  (index) => QuestionWidget(
-                        isAnswer: true,
-                        type: type,
-                        question: viewModel.answer[index].questionText,
-                        answer: viewModel.answer[index].answer,
-                      )),
+            body: SingleChildScrollView(
+              child: Column(
+                children: List.generate(
+                    viewModel.answer.length,
+                    (index) {
+
+                      return QuestionWidget(
+                          isAnswer: true,
+                          type: type,
+                          question: viewModel.answer[index].questionText!,
+                          answer: viewModel.answer[index].answer,
+                        ); },),
+              ),
             ),
           );
         });

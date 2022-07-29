@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import '../app_controller.dart';
-import '../screen/category_screen.dart';
+import '../screen/category/category_screen.dart';
 
 class OptionsTile extends ViewModelWidget<AppController> {
   final Cats type;
@@ -12,6 +12,7 @@ class OptionsTile extends ViewModelWidget<AppController> {
           return Column(
               children: List.generate(viewModel.checkType(type).options!.length, (index) {
                 return RadioListTile(
+                  activeColor: Theme.of(context).primaryColor,
                   value: viewModel.checkType(type).options![index],
                   groupValue: viewModel.checkType(type).answer,
                   onChanged: (String? value)=> viewModel.updateOption(value, index, type),

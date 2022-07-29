@@ -1,7 +1,7 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:survey_challenge/app/app_setup.router.dart';
-import 'package:survey_challenge/screen/category_screen.dart';
+import 'package:survey_challenge/screen/category/category_screen.dart';
 import 'app/app_setup.locator.dart';
 import 'core/models/question_model.dart';
 
@@ -22,14 +22,10 @@ class AppController extends BaseViewModel {
 
   void nextPage(Cats type, viewModel) {
     if (pageIndex != checkTypeLength(type) - 1) {
-      // print(checkType(type).answer);
-      // answer.add(checkType(type));
       pageIndex++;
 
       notifyListeners();
     } else {
-      // answer.add(checkType(type));
-      // print(answer);
       navigate(Routes.previewAnswerScreen,
           arguments: PreviewAnswerScreenArguments(type: type, viewModel:viewModel ));
     }
@@ -64,7 +60,8 @@ class AppController extends BaseViewModel {
 
   void updateOption(String? value, int index, Cats type) {
     checkType(type).answer = value!;
-    answer.add(Question(questionText: checkType(type).questionText, answer: value, type: type));
+    // answer = List.filled(checkTypeLength(type), Question(),growable: true);
+      answer.insert(pageIndex, checkType(type));
     notifyListeners();
   }
 
