@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
-import 'package:survey_challenge/app_controller.dart';
-import 'package:survey_challenge/utils/text_styles.dart';
-import 'package:survey_challenge/widgets/question_widget.dart';
+import 'package:personavey/app_controller.dart';
+import 'package:personavey/utils/text_styles.dart';
+import 'package:personavey/widgets/question_widget.dart';
 
 import 'category/category_screen.dart';
 

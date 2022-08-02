@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:survey_challenge/screen/welcome/persona_welcome_screen.dart';
+import 'package:personavey/screen/welcome/persona_welcome_screen.dart';
 
 import '../utils/text_styles.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:stacked/stacked.dart';
-import 'package:survey_challenge/screen/login/login_view_model.dart';
-import 'package:survey_challenge/utils/images.dart';
+import 'package:personavey/screen/login/login_view_model.dart';
+import 'package:personavey/utils/images.dart';
 
 import '../../utils/text_styles.dart';
 import '../../widgets/perona_button.dart';

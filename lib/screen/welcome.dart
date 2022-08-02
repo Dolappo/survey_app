@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:stacked/stacked.dart';
-import 'package:survey_challenge/app/app_setup.router.dart';
-import 'package:survey_challenge/app_controller.dart';
-import 'package:survey_challenge/utils/text_styles.dart';
+import 'package:personavey/app/app_setup.router.dart';
+import 'package:personavey/app_controller.dart';
+import 'package:personavey/utils/text_styles.dart';
 
 import 'category/category_screen.dart';
 

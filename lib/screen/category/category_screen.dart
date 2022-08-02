@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:survey_challenge/app_controller.dart';
-import 'package:survey_challenge/utils/text_styles.dart';
+import 'package:personavey/app_controller.dart';
+import 'package:personavey/utils/text_styles.dart';
 
 class CatScreen extends StatelessWidget {
   const CatScreen({Key? key}) : super(key: key);
@@ -20,6 +20,7 @@ class CatScreen extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
+
         title: Text('Category', style: titleStyle.copyWith(color: Theme.of(context).primaryColor),),
         elevation: 0,
         backgroundColor: Colors.transparent,

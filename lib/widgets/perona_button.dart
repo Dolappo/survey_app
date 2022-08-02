@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_challenge/utils/text_styles.dart';
+import 'package:personavey/utils/text_styles.dart';
 
 class PersonaButton extends StatelessWidget {
   final void Function()? onPressed;

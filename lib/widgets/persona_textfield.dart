@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_challenge/utils/text_styles.dart';
-class PersonaTextField extends StatelessWidget {
+import 'package:personavey/utils/text_styles.dart';
+class PersonaTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final Function(String?)? onChanged;
   final TextStyle? inputStyle;
@@ -26,6 +26,11 @@ class PersonaTextField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<PersonaTextField> createState() => _PersonaTextFieldState();
+}
+
+class _PersonaTextFieldState extends State<PersonaTextField> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 15.0),
@@ -38,17 +43,17 @@ class PersonaTextField extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 10.0, top: 3),
           child: TextFormField(
-            textInputAction: textInputAction,
-            obscureText: obscureText,
-            validator: validator,
-            style: inputStyle,
-            onChanged: onChanged,
-            controller: controller,
-            keyboardType: keyboardType,
+            textInputAction: widget.textInputAction,
+            obscureText: widget.obscureText,
+            validator: widget.validator,
+            style: widget.inputStyle,
+            // onChanged: widget.onChanged,
+            controller: widget.controller,
+            keyboardType: widget.keyboardType,
             decoration: InputDecoration(
               border: InputBorder.none,
-              suffix: suffixIcon,
-              hintText: hintText,
+              suffix: widget.suffixIcon,
+              hintText: widget.hintText,
               hintStyle: bodyStyle.copyWith(color: Colors.grey, fontSize: 14),
             ),
 

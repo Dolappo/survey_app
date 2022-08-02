@@ -1,6 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:survey_challenge/app/app_setup.router.dart';
+import 'package:personavey/app/app_setup.router.dart';
 
 import '../../app/app_setup.locator.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:survey_challenge/screen/category/category_screen.dart';
-import 'package:survey_challenge/utils/text_styles.dart';
+import 'package:personavey/screen/category/category_screen.dart';
+import 'package:personavey/utils/text_styles.dart';
 import '../app_controller.dart';
 import 'options_tile.dart';
 

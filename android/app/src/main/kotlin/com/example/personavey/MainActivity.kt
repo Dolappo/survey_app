@@ -1,4 +1,4 @@
-package com.example.survey_challenge
+package com.example.personavey
 
 import io.flutter.embedding.android.FlutterActivity
 
