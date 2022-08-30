@@ -82,6 +82,9 @@ class CreateAccViewModel extends BaseViewModel {
   //     return false;
   //   }
   // }
+  void login(){
+    _navigate.navigateTo(Routes.loginScreen);
+  }
 
   Future<void> createAccount() async {
     // formState.currentState!.validate() &&

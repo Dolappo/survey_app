@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personavey/utils/colors.dart';
 import 'package:personavey/utils/text_styles.dart';
 class PersonaTextField extends StatefulWidget {
   final String? Function(String?)? validator;
@@ -33,11 +34,11 @@ class _PersonaTextFieldState extends State<PersonaTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15.0),
+      padding: const EdgeInsets.only(top: 10.0),
       child: Container(
-        height: 50,
+        height: 72,
         decoration: BoxDecoration(
-          color: Colors.grey.shade100,
+          color:AppColor.tfColor,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Padding(
@@ -54,7 +55,7 @@ class _PersonaTextFieldState extends State<PersonaTextField> {
               border: InputBorder.none,
               suffix: widget.suffixIcon,
               hintText: widget.hintText,
-              hintStyle: bodyStyle.copyWith(color: Colors.grey, fontSize: 14),
+              hintStyle: bodyStyle.copyWith(color: Colors.grey, fontSize: 13),
             ),
 
           ),

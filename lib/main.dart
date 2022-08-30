@@ -28,9 +28,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.teal,
+        primaryColor: const Color(0xff4557F6),
         accentColor: Colors.tealAccent,
-        backgroundColor: Colors.teal,
+        // backgroundColor: Colors.teal,
         buttonColor: Colors.teal
       ),
       debugShowCheckedModeBanner: false,

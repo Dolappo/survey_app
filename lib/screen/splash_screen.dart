@@ -11,27 +11,48 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+  @override
+
+  AnimationController? controller;
+  Animation? backgroundAnimation;
+  Animation? textAnimation;
   @override
   void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
+    backgroundAnimation = ColorTween(begin: Colors.white, end: Theme.of(context).primaryColor)
+        .animate(controller!);
+    textAnimation = ColorTween(begin: Theme.of(context).primaryColor, end: Colors.white).animate(controller!);
+    controller!.forward();
+    controller!.addListener(() {
+      setState(() {});
+    });
     Future.delayed(const Duration(seconds: 5)).then(
-      (value) => Navigator.push(
+          (value) => Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const PersonaWelcomeScreen(),
         ),
       ),
     );
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal,
+      backgroundColor: backgroundAnimation!.value,
       body: Center(
       child:
-          Text('Personavey', style: titleStyle.copyWith(fontSize: 32, fontWeight: FontWeight.w700, color: Colors.white)),
+          Text('Personavey',
+              style: titleStyle.copyWith(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700,
+                  color: textAnimation!.value)),
       ),
     );
   }
