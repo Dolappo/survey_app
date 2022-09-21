@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:survey_challenge/app/app_setup.router.dart';
-import 'package:survey_challenge/app_controller.dart';
+import 'package:personavey/app/app_setup.router.dart';
+import 'package:personavey/app_controller.dart';
 
 class ReadyScreen extends StatelessWidget {
   const ReadyScreen({Key? key}) : super(key: key);

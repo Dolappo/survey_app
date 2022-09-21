@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "771480072964",
+    "project_id": "personavey",
+    "storage_bucket": "personavey.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771480072964:android:939727d659fffa39d6d651",
+        "android_client_info": {
+          "package_name": "com.example.personavey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771480072964-p3ck6igbp76kegitm81h00e7t2opa155.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJuipPho8L6S6_aN6WUb6mMtUzA1t8JwU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771480072964-p3ck6igbp76kegitm81h00e7t2opa155.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
